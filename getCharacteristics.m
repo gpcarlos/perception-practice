@@ -15,7 +15,7 @@ function characteristics = getCharacteristics(segments)
     
     %% Delta Cepstrum
     p = 10;
-    mask = -p:p
+    mask = -p:p;
     extended_mask = repmat(mask,size(ceps_coeff,1),1);
     extended_coeff = [zeros(size(ceps_coeff,1),p) ceps_coeff ... 
                       zeros(size(ceps_coeff,1),p)];              
