@@ -25,7 +25,8 @@ for i=1:num_words
     pattern{i} = getCharacteristics(segments);
 end
 
-while true
+class = 0;
+while class ~= 5
     fprintf('--- Test Word ---\n');
         
     signal = recording(t, Fs, Ch, num_bits);
