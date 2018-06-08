@@ -15,10 +15,10 @@ function moveRobot(b, m)
             fprintf(b,"b"); pause(2); fprintf(b,"s");
         case 3 % Left
             disp('You said... Left!!');
-            fprintf(b,"l"); pause(2); fprintf(b,"s");         
+            fprintf(b,"l"); pause(1); fprintf(b,"s");         
         case 4 % Right
             disp('You said... Right!!');
-            fprintf(b,"r"); pause(2); fprintf(b,"s");        
+            fprintf(b,"r"); pause(1); fprintf(b,"s");        
         case 5 % Stop
             disp('You said... Stop!!');
             fprintf(b,"s");     
