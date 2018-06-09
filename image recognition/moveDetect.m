@@ -5,6 +5,8 @@ clc
 
 addpath('../connection');
 
+b = establishConnection;
+
 cam = webcam(1);
 old = snapshot(cam);
 old = flip(old,2); %Rotate the image.
@@ -31,6 +33,9 @@ while op
         m = movement(var);
         if (m == 5)
             op = false; %Stop the loop and go to the speech recogntion
+            
+        else
+            moveRobot(b, m);
         end
         %pause(3);
     end
@@ -40,3 +45,4 @@ while op
 end
 
 delete(cam)
+delete(b)
