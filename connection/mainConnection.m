@@ -49,7 +49,10 @@ while class ~= 5
     
     % Move the robot
     [~, class] = min(errors);
-    moveRobot(b, class);
+    moveRobot(b, class);;
     disp('***** Press any key to test another word *****');
     pause
 end
+
+fclose(b)
+delete(b)

@@ -1,9 +1,10 @@
 addpath('../connection');
 clear all
 close all
-clc
 
 addpath('../connection');
+
+b = establishConnection;
 
 cam = webcam(1);
 old = snapshot(cam);
@@ -11,7 +12,8 @@ old = flip(old,2); %Rotate the image.
 %old = rgb2gray(old); %Grayscale image
 %old = im2bw(old,graythresh(old)); %Black and white image
  img = snapshot(cam);
-       img = imresize(img,0.5);
+       img = flip(img,2);
+      % img = imresize(img,0.5);
        rojo = img(:,:,1);
        verde= img(:,:,2);
        azul= img(:,:,3);
@@ -32,15 +34,18 @@ old = flip(old,2); %Rotate the image.
        ele = strel('disk',2);
        img2 = imopen(img2,ele);
        old = img2;
-op = true;
 
-while true
+op = true;
+p = size(old,1) * size(old,2) * 0.00001; %Number of acceptable noise pixels to detect a movement.
+
+while op
 %     new = snapshot(cam);
 %     new = flip(new,2);%Rotate the image.
     %new = rgb2gray(new);%Grayscale image
     %new = im2bw(new,graythresh(new));%Black and white image
      img = snapshot(cam);
-       img = imresize(img,0.5);
+       img = flip(img,2);
+      % img = imresize(img,0.5);
        rojo = img(:,:,1);
        verde= img(:,:,2);
        azul= img(:,:,3);
@@ -67,8 +72,24 @@ while true
     e=strel('square',2);
     var=imerode(var,e);
     imshow(var);
+    
+   if(sum(sum(var)) > p)
+        m = movement(var);
+        if (m == 5)
+            op = false; %Stop the loop and go to the speech recogntion
+            
+        else
+            if(m ~= 0)
+                moveRobot(b, m);
+            end
+        end
+        %pause(3);
+    end
+    
     old = new;
-    pause (0.01);
+    %pause (0.01);
 end
 
 delete(cam)
+fclose(b)
+delete(b)
