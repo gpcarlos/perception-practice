@@ -5,7 +5,7 @@ clc
 
 addpath('../connection');
 
-b = establishConnection;
+%b = establishConnection;
 
 cam = webcam(1);
 old = snapshot(cam);
@@ -35,7 +35,7 @@ while op
             op = false; %Stop the loop and go to the speech recogntion
             
         else
-            moveRobot(b, m);
+            %moveRobot(b, m);
         end
         %pause(3);
     end
@@ -45,4 +45,4 @@ while op
 end
 
 delete(cam)
-delete(b)
+%delete(b)
