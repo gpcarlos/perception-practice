@@ -18,7 +18,7 @@ else
 end
 % End initialization code - DO NOT EDIT
 
-global t Fs Ch num_bits num_samples displ words dtw_ num_words b
+global t Fs Ch num_bits num_samples displ words dtw_ num_words
 
 t = 2; Fs = 8000; Ch = 1;
 num_bits = 16; num_samples = 100;
@@ -88,12 +88,19 @@ function pushbutton2_Callback(hObject, eventdata, handles)
     [~, class] = min(errors);
     if class < 5
         moveRobot(b,class);
+        msg = sprintf(' '); set(handles.text,'String',msg)
+        set(handles.text1,'String',msg)
     else
-       disp('Stop or Image');
+       if class == 5 % Stop
+           fclose(b); delete(b);
+           close all
+       else % Image
+           close all;
+           imgGui;           
+       end
     end
     
-    msg = sprintf(' '); set(handles.text,'String',msg)
-    set(handles.text1,'String',msg)
+    
 
 
 % --- Executes on button press in checkbox. DTW

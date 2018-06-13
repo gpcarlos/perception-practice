@@ -18,13 +18,14 @@ else
 end
 % End initialization code - DO NOT EDIT
 
-global b
-b = establishConnection
 
 % --- Executes just before gui is made visible.
 function gui_OpeningFcn(hObject, eventdata, handles, varargin)
 handles.output = hObject;
 guidata(hObject, handles);
+
+global b
+b = establishConnection;
 
 function varargout = gui_OutputFcn(hObject, eventdata, handles) 
 varargout{1} = handles.output;
@@ -32,11 +33,13 @@ varargout{1} = handles.output;
 
 % --- Executes on button press in SPEECH RECOGNITION
 function pushbutton1_Callback(hObject, eventdata, handles)
+    close all;
     speech
     
 
 
 % --- Executes on button press in IMAGE RECOGNITION
 function pushbutton2_Callback(hObject, eventdata, handles)
-
+    close all;
+    imgGui
     
